@@ -11,9 +11,9 @@
 Edimar Calebe Castanho
 <br>
 Aluno de Engenharia da Computação do 4º ano
-- @fa[github gp-contact](https://github.com/Calebe94)
-- @fa[reddit gp-contact](http://reddit.com/user/Calebe94)
-- @fa[telegram gp-contact](http://t.me/calebe94)
+- @fa[github gp-contact](Calebe94)
+- @fa[reddit gp-contact](Calebe94)
+- @fa[fa-telegram gp-contact](calebe94)
 
 ---
 
