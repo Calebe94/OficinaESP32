@@ -8,15 +8,14 @@
 ### Informações do Instrutor:
 
 <br>
-Edimar Calebe Castanho
-<br>
-Aluno de Engenharia da Computação do 4º ano
-- @fa[github gp-contact](https://github.com/Calebe94)
-- @fa[reddit gp-contact](http://reddit.com/user/Calebe94)
-- @fa[telegram gp-contact](http://t.me/calebe94)
-- @fa[github gp-contact](Calebe94) 
-- @fa[reddit gp-contact](Calebe94) 
-- @fa[fa-telegram gp-contact](calebe94) 
+** Edimar Calebe Castanho **
+<br> 
+** Aluno de Engenharia da Computação do 4º ano **
+###### Redes Sociais
+
+| [Github](https://github.com/Calebe94) | [Reddit](http://reddit.com/user/Calebe94) | [Telegram](http://t.me/calebe94) |
+|:-----:|:----:|:----:|
+| [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" style="width: 150px;"/>](https://github.com/Calebe94) | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/reddit-512.png" style="width: 150px;"/>](http://reddit.com/user/Calebe94) | [<img src="https://cdn2.iconfinder.com/data/icons/telegram/154/logotype-telegram-round-blue-logo-512.png" style="width: 150px;"/>](http://t.me/calebe94) |
 
 ---
 
@@ -216,6 +215,99 @@ while True:
 @[5,6](Seta GPIO 2 para estado lógico ALTO e espera 500ms)
 @[7,8](Seta GPIO 2 para estado lógico BAIXO e espera 500ms)
 
+---
+
+## I2C
+### Descrição
+* Inter-Integrated Circuit(Circuito Inter-Integrado);
+* Comunicação Serial Síncrona;
+* Multi-Mestre;
+* Multi-Escravo;
+* Desenvolvido pela Philips em 1982(Atual NXP Semiconductors)
+
+---
+## I2C
+### Descrição
+* Muito utilizada para conectar perifericos:
+    * de baixa velocidade;
+    * em curtas distâncias;
+
+aos microcontroladores e processadores;
+---
+## I2C
+
+* Desde 2006 nenhuma taxa é cobrada para implementar o protocolo I2C.
+* Porém, taxas são cobradas para obter endereços I2C para dispositivos escravos.
+* Vários concorrentes, como Texas Instruments, STMicroelectronics e Motorola possuem produtos que implementam o protocolo desde a década de 90.
+
+---
+
+## Especificação:
+
+* I2C utiliza apenas 2 linhas bidirecionais de dreno aberto;
+    * SDA (Serial Data) - Dados Seriais;
+    * SCL (Serial Clock) - Clock Serial (Gerado pelo Mestre);
+* As duas linhas precisam utilizar resistores de pull-up;
+* Tensões tipicamente utilizadas são 5V ou 3,3V.
+
+---
+
+## Especificação:
+
+* Possui endereçamento de 7 bits ( e 10 bits em casos raros )
+* velocidade do barramento:
+  * Low-speed mode: 10 kbit/s;
+  * Standard mode: 100 kbit/s;
+  * Fast Mode: 400 kbit/s;
+  * Fast Mode Plus: 1 Mbit/s;
+  * High Speed Mode: 3.4 Mbit/s.
+---
+
+## Condição de START e STOP:
+
+* Todas as transações:
+  * Iniciam com um **START**(S);
+  * E terminam com um **STOP**(P);
+* Sempre **geradas** pelo **MESTRE**
+---
+
+## Condição de START e STOP:
+
+![i2c-start_stop](http://i2c.info/wp-content/images/i2c.info/start-stop.gif)
+
+* **START**: **ALTO** p/ **BAIXO** em *SDA* enquanto *SCL* está em **ALTO**;
+* **STOP**: **BAIXO** p/ **ALTO** em *SDA* enquanto *SCL* está em **ALTO**.
+---
+
+## Condição de START e STOP:
+
+* O barramento é considerado **ocupado** depois de uma condição de START;
+* O barramento é considerado **livre** novamente após a condição de STOP;
+* O barramento permanece **ocupado** se um **START repetido** (Sr) for gerado ao invés de um **STOP**;
+  - **START** e **Repeated START** (Sr) são funcionalmente identicas;
+---
+
+## Mensagem:
+
+![i2c-message](https://opencores.org/usercontent,img,1352582784)
+* Cada BYTE colocado no **SDA** deve ter 8 bits;
+* Cada byte deve ser seguido de um **bit de Reconhecimento**(*Acknowledge bit);
+* O bit mais significativo (**MSB**)são transferidos primeiro;
+---
+## ACK/NACK:
+
+* ACK:
+  * I2C Mestre envia o endereço no barramento;
+  * Se o escravo que reconhecer este endereço devolve um **ACK**.
+  * Isto informa ao mestre que o escravo está no barramento, e está respondendo.
+  * Se nenhum escravo reconhecer este endereço, o resultado é NACK.
+  * Neste caso o Mestre deve abortar a operação.
+  * Não há a possibilidade de tentar novamente.
+* Avisa para o dispositivo escravo que a transmissão mestre-escravo acabou;
+
+---
+## STOP:
+* Avisa para os outros mestres no barramento que a transmissão encerrou;
 ---
 
 ### Perguntas?

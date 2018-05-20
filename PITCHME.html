@@ -1,0 +1,269 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style></style><title>PITCHME</title></head><body><article class="markdown-body"><h1 id="esp32"><a name="user-content-esp32" href="#esp32" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>ESP32</h1>
+<h2 id="e-protocolo-i2c"><a name="user-content-e-protocolo-i2c" href="#e-protocolo-i2c" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>e Protocolo I2C</h2>
+<!-- ### Oficina do IOT Maker Hub -->
+
+<hr />
+<h3 id="informacoes-do-instrutor"><a name="user-content-informacoes-do-instrutor" href="#informacoes-do-instrutor" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Informações do Instrutor:</h3>
+<p><br><br />
+Edimar Calebe Castanho<br />
+<br><br />
+Aluno de Engenharia da Computação do 4º ano<br />
+- <a href="https://github.com/Calebe94"><img alt="github" src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" /></a><br />
+- <a href="http://reddit.com/user/Calebe94"><img alt="reddit" src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/reddit-512.png" /></a><br />
+- <a href="http://t.me/calebe94"><img alt="telegram" src="" /></a><br />
+- </p>
+<hr />
+<h3 id="oque-e-o-esp32"><a name="user-content-oque-e-o-esp32" href="#oque-e-o-esp32" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Oque é o ESP32?</h3>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoMf0HGjAsmxbRkZ37B_Uqslcc58JVv2cI_zdW_hcHCL7JLShf" style="width: 150px;"/><br />
+<em> System on a Chip (SoC) - Microcontrolador;<br />
+</em> Baixo Custo;<br />
+<em> &ldquo;Baixo Consumo&rdquo;;<br />
+</em> com Wi-Fi embutido;<br />
+<em> Bluetooth 4.2 e BLE embutido;<br />
+</em> Dual-core;</p>
+<hr />
+<h3 id="quem-o-projetou"><a name="user-content-quem-o-projetou" href="#quem-o-projetou" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Quem o Projetou?</h3>
+<p><img src="https://www.exploreembedded.com/wiki/images/thumb/f/f0/0_ESP32_chip.jpg/447px-0_ESP32_chip.jpg" style="width: 150px;" /></p>
+<ul>
+<li>Espressif Systems (Shanghai - China);</li>
+<li>Empresa apenas projeta os CI&rsquo;s(Não os fabrica);</li>
+<li>Mesma empresa do ESP8266;</li>
+<li>Desenvolve soluções para IOT;</li>
+</ul>
+<hr />
+<h3 id="caracteristicas-de-hardware"><a name="user-content-caracteristicas-de-hardware" href="#caracteristicas-de-hardware" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Características de Hardware:</h3>
+<ul>
+<li>Microprocessador dual-core Tensilica Xtensa LX6(32 bit);</li>
+<li>Frequência de Clock de 80Mhz até 240MHz;</li>
+<li>Co-processador de baixíssimo consumo</li>
+<li>Permite fazer conversões ADC em <strong>deep sleep</strong></li>
+<li>Comunicações sem fio:</li>
+<li>Wi-Fi: 802.11b/g/n/e/i (2.4GHz)</li>
+<li>Bluetooth: v4.2 e BLE</li>
+</ul>
+<hr />
+<h3 id="caracteristicas-de-hardware_1"><a name="user-content-caracteristicas-de-hardware_1" href="#caracteristicas-de-hardware_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Características de Hardware:</h3>
+<h4 id="memoria-interna"><a name="user-content-memoria-interna" href="#memoria-interna" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Memória Interna:</h4>
+<ul>
+<li>ROM: 448 KiB (Usada para Boot e funções do core);</li>
+<li>SRAM: 520 KiB (Para dados e instruções);</li>
+<li>RTC fast SRAM: 8 KiB (para armazenamento e CPU durante o boot do RTC);</li>
+<li>RTC slow SRAM: 8 KiB (Utilizado pelo co-processador durante o deep-sleep);</li>
+<li>Flash: entre 0 e 4 MiB (Suporta até 16MiB);</li>
+</ul>
+<hr />
+<h3 id="caracteristicas-de-hardware_2"><a name="user-content-caracteristicas-de-hardware_2" href="#caracteristicas-de-hardware_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Características de Hardware:</h3>
+<h4 id="perifericos-io"><a name="user-content-perifericos-io" href="#perifericos-io" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Periféricos IO:</h4>
+<ul>
+<li>36 GPIOs</li>
+<li>10 pinos com Touch capacitivo;</li>
+<li>Conversores 18 pinos ADCs e 2 pinos DACs;</li>
+<li>2 I2C e 2 I2S;</li>
+<li>3 UART;</li>
+<li>CAN 2.0;</li>
+<li>3 SPI;</li>
+<li>16 PWM;</li>
+</ul>
+<hr />
+<h3 id="caracteristicas-de-hardware_3"><a name="user-content-caracteristicas-de-hardware_3" href="#caracteristicas-de-hardware_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Características de Hardware:</h3>
+<h4 id="seguranca"><a name="user-content-seguranca" href="#seguranca" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Segurança:</h4>
+<ul>
+<li>Padrão de segurança IEEE 802.11, incluindo WFA, WPA/WPA2;</li>
+<li>Secure Boot;</li>
+<li>Flash Encryption;</li>
+<li>Criptografia em hardware: AES, SHA-2, RSA, ECC e RNG;</li>
+</ul>
+<hr />
+<h3 id="diagrama-de-blocos-de-funcoes"><a name="user-content-diagrama-de-blocos-de-funcoes" href="#diagrama-de-blocos-de-funcoes" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Diagrama de Blocos de Funções</h3>
+<p><img src="http://esp32.net/images/_resources/ESP32_Function_Block_Diagram.svg" style="width: 500px;"/></p>
+<hr />
+<h3 id="comparacao-com-outros-ucs"><a name="user-content-comparacao-com-outros-ucs" href="#comparacao-com-outros-ucs" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Comparação com outros uC&rsquo;s:</h3>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">ESP32</th>
+<th align="center">ESP8266</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Cores</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">Arquitetura(bits)</td>
+<td align="center">32</td>
+<td align="center">32</td>
+</tr>
+<tr>
+<td align="center">Clock(MHz)</td>
+<td align="center">160</td>
+<td align="center">80</td>
+</tr>
+<tr>
+<td align="center">Wifi</td>
+<td align="center">Sim</td>
+<td align="center">Sim</td>
+</tr>
+<tr>
+<td align="center">Bluetooth</td>
+<td align="center">Sim</td>
+<td align="center">Não</td>
+</tr>
+<tr>
+<td align="center">RAM (KB)</td>
+<td align="center">512</td>
+<td align="center">160</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="comparacao-com-outros-ucs_1"><a name="user-content-comparacao-com-outros-ucs_1" href="#comparacao-com-outros-ucs_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Comparação com outros uC&rsquo;s:</h3>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">ESP32</th>
+<th align="center">ESP8266</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Flash</td>
+<td align="center">16Mb</td>
+<td align="center">16 Mb</td>
+</tr>
+<tr>
+<td align="center">GPIO</td>
+<td align="center">36</td>
+<td align="center">17</td>
+</tr>
+<tr>
+<td align="center">Interfaces</td>
+<td align="center">SPI/I2C/</br>UART/I2S/CAN</td>
+<td align="center">SPI/I2C/</br>UART/I2S</td>
+</tr>
+<tr>
+<td align="center">ADC</td>
+<td align="center">18</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">DAC</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="comparacao-de-preco"><a name="user-content-comparacao-de-preco" href="#comparacao-de-preco" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Comparação de preço:</h3>
+<table>
+<thead>
+<tr>
+<th>ESP32</th>
+<th>ESP8266</th>
+<th>Arduino UNO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="esp32" src="https://i.imgur.com/4YzMzHU.png" /></td>
+<td><img alt="esp8266" src="https://i.imgur.com/Ar8TaMH.png" /></td>
+<td><img alt="arduino uno" src="https://i.imgur.com/MkJchEC.png" /></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="como-programar"><a name="user-content-como-programar" href="#como-programar" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Como programar?:</h3>
+<table>
+<thead>
+<tr>
+<th>Arduino Framework</th>
+<th>ESP-IDF (C/C++)</th>
+<th>MicroPython</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="esp32 and arduino" src="https://mjrobot.files.wordpress.com/2017/09/esp32-portada.png" /></td>
+<td><img alt="esp-idf" src="https://avatars1.githubusercontent.com/u/9460735?s=200&amp;v=4" /></td>
+<td><img alt="micropython+esp32" src="https://i.ytimg.com/vi/QPNmQZrG8ZU/maxresdefault.jpg" /></td>
+</tr>
+</tbody>
+</table>
+<p>&mdash;?code=project/main/main.c&amp;title=C Main File</p>
+<p>@<a href="Present code found within any repo source file.">1,3-6</a><br />
+@<a href="Without ever leaving your slideshow.">8-18</a><br />
+@<a href="Using GitPitch code-presenting with (optional) annotations.">19-28</a></p>
+<hr />
+<p>@title[Hello World com Arduino]</p>
+<p><span class="slide-title">Pisca LED</span></p>
+
+<pre><code class="c">void setup() {
+  pinMode (2, OUTPUT);
+}
+void loop() {
+  digitalWrite (2, HIGH);
+  delay(500);
+  digitalWrite (2, LOW);
+  delay(500);
+}
+</code></pre>
+
+<p>@<a href="função setup() seta o GPIO 5 como saída digital">1,3</a><br />
+@<a href="Cria loop infinito">4</a><br />
+@<a href="Seta GPIO 2 para estado lógico ALTO e espera 500ms">5,6</a><br />
+@<a href="Seta GPIO 2 para estado lógico BAIXO e espera 500ms">7,8</a></p>
+<hr />
+<p>@title[Hello World com ESP-IDF]</p>
+<p><span class="slide-title">Pisca LED</span></p>
+
+<pre><code class="c">#include &lt;freertos/FreeRTOS.h&gt;
+#include &lt;freertos/task.h&gt;
+#include &lt;driver/gpio.h&gt;
+void app_main(){
+  gpio_pad_select_gpio(GPIO_NUM_2);
+  gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);
+  while(1){
+    gpio_set_level(GPIO_NUM_2, 1);
+    vTaskDelay(500/portTICK_RATE_MS);
+    gpio_set_level(GPIO_NUM_2, 0);
+    vTaskDelay(500/portTICK_RATE_MS);        
+  }
+}
+</code></pre>
+
+<p>@[1,2](Importa as bibliotecas de FreeRTOS necessárias para a utilização do vTaskDelay() - delay<br />
+@<a href="Importa a bilblioteca de acesso à GPIO">3</a><br />
+@<a href="Exporta a GPIO 2 e seta como saída">5,6</a><br />
+@<a href="Cria o loop infinito">7</a><br />
+@<a href="Seta GPIO 2 para estado lógico ALTO e espera 500ms">8,9</a><br />
+@<a href="Seta GPIO 2 para estado lógico BAIXO e espera 500ms">10,11</a></p>
+<hr />
+<p>@title[Hello World com MicroPython]</p>
+<p><span class="slide-title">Pisca LED</span></p>
+
+<pre><code class="python">import utime
+import machine
+pin2 = machine.Pin(2, machine.Pin.OUT)
+while True:
+        pin2.value(1)
+        utime.sleep_ms(500)
+        pin2.value(0)
+        utime.sleep_ms(500)
+</code></pre>
+
+<p>@<a href="Importa módulo de tempo p/ o" title="delay">1</a><br />
+@<a href="Import módulo de acesso ao hardware">2</a><br />
+@<a href="Instancia a classe de Pin setando o GPIO 2 para saída">3</a><br />
+@<a href="Cria loop infinito">4</a><br />
+@<a href="Seta GPIO 2 para estado lógico ALTO e espera 500ms">5,6</a><br />
+@<a href="Seta GPIO 2 para estado lógico BAIXO e espera 500ms">7,8</a></p>
+<hr />
+<h3 id="perguntas"><a name="user-content-perguntas" href="#perguntas" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Perguntas?</h3>
+<p><br></p>
+<p>@fa<a href="https://github.com/Calebe94/">github gp-contact</a></p>
+<p>@fa<a href="https://reddit.com/u/Calebe94">reddit gp-contact</a></p>
+<p>@fa<a href="http://t.me/calebe94">telegram gp-contact</a></p></article></body></html>
