@@ -22,14 +22,17 @@ void i2c0_init(void){
 }
 
 void save_to_eeprom(time_t time){
-    uint8_t byte_1 = 0, byte_2 = 0, byte_3 = 0, byte_4 = 0;
+    uint8_t byte_1 = 0, byte_2 = 0, byte_3 = 0, byte_4 = 0, aux_data=0;
     byte_1 = (uint8_t)((time&0xFF000000)>>24);
 	byte_2 = (uint8_t)((time&0x00FF0000)>>16);
 	byte_3 = (uint8_t)((time&0x0000FF00)>>8);
 	byte_4 = (uint8_t)(time&0x000000FF);
 
+    printf("\n+====================| Salvo na EEPROM |====================+\n\n");
+    printf("\tsave_to_eeprom(): %s\n", ctime(&time));
     for( uint16_t offset = 0; offset < MAX_OFFSET; offset++){
-        if(at24c_read_byte(offset) == 0x00){
+        at24c_read_byte(offset, &aux_data);
+        if(aux_data == 0x00){
 			at24c_write_byte(offset++, (byte_1&0xFF));
 			at24c_write_byte(offset++, (byte_2&0xFF));
 			at24c_write_byte(offset++, (byte_3&0xFF));
@@ -37,19 +40,22 @@ void save_to_eeprom(time_t time){
             break;
         }
     }
+    printf("+===========================================================+\n");
 }
 
 void get_from_eeprom(){
     time_t aux_time = 0;
-    uint8_t byte_1 = 0, byte_2 = 0, byte_3 = 0, byte_4 = 0;
+    uint8_t byte_1 = 0, byte_2 = 0, byte_3 = 0, byte_4 = 0, aux_data = 0, from_eeprom = 0;
+    printf("\n+------------------| Recebido da EEPROM |------------------+\n\n");
     for( uint16_t offset = 0; offset < MAX_OFFSET; offset++){
-        if(at24c_read_byte(offset) != 0x00){
-            byte_1 = at24c_read_byte((offset++));
-            byte_2 = at24c_read_byte((offset++));
-            byte_3 = at24c_read_byte((offset++));
-            byte_4 = at24c_read_byte((offset));
+        at24c_read_byte(offset, &aux_data);
+        if(aux_data != 0x00){
+            at24c_read_byte(offset++, &byte_1);
+            at24c_read_byte(offset++, &byte_2);
+            at24c_read_byte(offset++, &byte_3);
+            at24c_read_byte(offset,   &byte_4);
             aux_time = (byte_1<<24) | (byte_2<<16) | (byte_3<<8) | byte_4;
-            printf("%s\n", ctime(&aux_time));
+            printf("\tget_from_eeprom(%d): - %s\n", from_eeprom++, ctime(&aux_time));
         }else break;
     }
 }
@@ -66,14 +72,13 @@ void app_main(void){
         if(gpio_get_level(GPIO_NUM_32)){
             while(gpio_get_level(GPIO_NUM_32));
             time = get_time();
-            printf("%s\n", ctime(&time));
             save_to_eeprom(time);
         } 
         if(gpio_get_level(GPIO_NUM_33)){
             while(gpio_get_level(GPIO_NUM_33));
             get_from_eeprom();
-            // printf("GPIO33\n");
         }
+
         vTaskDelay(10);
     }
 }
