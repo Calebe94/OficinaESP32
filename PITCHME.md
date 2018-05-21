@@ -13,7 +13,7 @@
 ** Aluno de Engenharia da Computação do 4º ano **
 ###### Redes Sociais
 
-| [Github](https://github.com/Calebe94) | [Reddit](http://reddit.com/user/Calebe94) | [Telegram](http://t.me/calebe94) |
+| [Calebe94](https://github.com/Calebe94) | [/u/Calebe94](http://reddit.com/user/Calebe94) | [calebe94](http://t.me/calebe94) |
 |:-----:|:----:|:----:|
 | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" style="width: 150px;"/>](https://github.com/Calebe94) | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/reddit-512.png" style="width: 150px;"/>](http://reddit.com/user/Calebe94) | [<img src="https://cdn2.iconfinder.com/data/icons/telegram/154/logotype-telegram-round-blue-logo-512.png" style="width: 150px;"/>](http://t.me/calebe94) |
 
@@ -133,12 +133,6 @@
 |-------------------|-----------------|-------------|
 | ![esp32 and arduino](https://mjrobot.files.wordpress.com/2017/09/esp32-portada.png) | ![esp-idf](https://avatars1.githubusercontent.com/u/9460735?s=200&v=4) | ![micropython+esp32](https://i.ytimg.com/vi/QPNmQZrG8ZU/maxresdefault.jpg) |
 
----?code=project/main/main.c&title=C Main File
-
-@[1,3-6](Present code found within any repo source file.)
-@[8-18](Without ever leaving your slideshow.)
-@[19-28](Using GitPitch code-presenting with (optional) annotations.)
-
 ---
 
 @title[Hello World com Arduino]
@@ -157,7 +151,7 @@ void loop() {
 }
 ```
 
-@[1,3](função setup() seta o GPIO 5 como saída digital)
+@[1,2,3](função setup() seta o GPIO 5 como saída digital)
 @[4](Cria loop infinito)
 @[5,6](Seta GPIO 2 para estado lógico ALTO e espera 500ms)
 @[7,8](Seta GPIO 2 para estado lógico BAIXO e espera 500ms)
@@ -184,8 +178,9 @@ void app_main(){
 }
 ```
 
-@[1,2](Importa as bibliotecas de FreeRTOS necessárias para a utilização do vTaskDelay() - delay
+@[1,2](Importa as bibliotecas de FreeRTOS necessárias para a utilização do vTaskDelay - delay)
 @[3](Importa a bilblioteca de acesso à GPIO)
+@[4](Igual a função main do C ANSII)
 @[5,6](Exporta a GPIO 2 e seta como saída)
 @[7](Cria o loop infinito)
 @[8,9](Seta GPIO 2 para estado lógico ALTO e espera 500ms)
@@ -265,6 +260,8 @@ aos microcontroladores e processadores;
 
 ## Condição de START e STOP:
 
+![start_stop](http://i2c.info/wp-content/images/i2c.info/start-stop.gif)
+
 * Todas as transações:
   * Iniciam com um **START**(S);
   * E terminam com um **STOP**(P);
@@ -287,37 +284,104 @@ aos microcontroladores e processadores;
   - **START** e **Repeated START** (Sr) são funcionalmente identicas;
 ---
 
-## Mensagem:
+## Mensagem
 
 ![i2c-message](https://opencores.org/usercontent,img,1352582784)
 * Cada BYTE colocado no **SDA** deve ter 8 bits;
 * Cada byte deve ser seguido de um **bit de Reconhecimento**(*Acknowledge bit);
 * O bit mais significativo (**MSB**)são transferidos primeiro;
 ---
-## ACK/NACK:
+
+## ACK e NACK
+* Terminologia:
+  * ACK - Acknowledge: Bit de Reconhecimento;
+  * NACK - Not Acknowledge: Bit de Não Reconhecimento;
+---
+
+## ACK e NACK
 
 * ACK:
-  * I2C Mestre envia o endereço no barramento;
-  * Se o escravo que reconhecer este endereço devolve um **ACK**.
-  * Isto informa ao mestre que o escravo está no barramento, e está respondendo.
-  * Se nenhum escravo reconhecer este endereço, o resultado é NACK.
-  * Neste caso o Mestre deve abortar a operação.
-  * Não há a possibilidade de tentar novamente.
-* Avisa para o dispositivo escravo que a transmissão mestre-escravo acabou;
+  * Ocorre após cada byte.
+  * Permite ao **RECEIVER** informar o **TRASMITTER** que o byte foi recebido com sucesso.
+  * O mestre gera todos os pulsos de clock.
 
 ---
-## STOP:
-* Avisa para os outros mestres no barramento que a transmissão encerrou;
+
+## ACK e NACK
+
+* O Bit de Reconhecimento é definido da seguinte forma:
+  * O **TRANSMISSOR** libera a linha **SDA** durante o clock de reconhecimento(nono pulso de clock);
+  * Então o **RECEPTOR** pode colocar a linha **SDA** para estado **BAIXO** e gerar o bit de **RECONHECIMENTO**;
+
+---
+
+## ACK e NACK
+* O Bit de Reconhecimento é definido da seguinte forma:
+  * Ou o **RECEPTOR** pode manter a linha **SDA** em estado **ALTO** e gerar um bit de **NÃO RECONHECIMENTO**;
+    * O **MESTRE** então pode gerar uma condição de **STOP** para abortar a transferência;
+    * Ou pode gerar uma condição de ** Repeated START**-(START REPETIDO), para inicializar uma nova transferência.
+---
+
+## ACK e NACK
+
+* Existem 5 condições que podem gerar um Bit de **Não Reconhecimento**:
+  1. Não existe nenhum receptor no barramento que reconhece o endereço transmitido;
+  2. O Receptor está imcapacitado de receber ou trasmitir pois está executando alguma função interna;
+
+---
+## ACK e NACK:
+
+* Existem 5 condições que podem gerar um Bit de **Não Reconhecimento**:
+  3. Durante a transferência, o receptor recebeu dados ou comandos que ele não reconhece;
+  4. Durante a transferência, o receptor não pode receber mais dados;
+  5. Um **MESTRE-RECEPTOR** deve sinalizar o final da tranferência para um **ESCRAVO-TRANSMISSOR**.
+---
+## Endereçamento e o bit R/W
+
+![i2c-complete_data_transfer](http://i2c.info/wp-content/images/i2c.info/data-transfer.gif)
+
+* A transferência de dados segue o formato da figura acima;
+---
+
+## Endereçamento e o bit R/W
+
+* Após a condição de **START**(S) gerada pelo **MESTRE**, um endereço de escravo é enviado;
+* Este endereço possui 7 bits, seguido por um 8º bit, que é a direção dos dados (Leitura ou Escria);
+  * WRITE: 0
+  * READ:  1
+---
+
+## Endereçamento e o bit R/W
+* A transferência de dados é sempre terminada pela condição de **STOP**(P) gerada pelo **MESTRE**
+* Entretanto, se o **MESTRE** ainda querer se comunicar com o barramento, ele pode gerar uma condição **Repeated START**(Sr) sem ter que gerar um **STOP**;
+---
+
+## Transferências Possíveis
+
+#### **MESTRE-Transmissor** trasmitindo para um **ESCRAVO-Receptor**:
+
+![master-trasmitter](http://i2c.info/wp-content/images/i2c.info/7-bit-address-writing.gif)
+---
+
+## Transferências Possíveis
+
+#### **MESTRE-Receptor** recebendo de um **ESCRAVO-Trasnmissor**:
+
+![master-receiver](http://i2c.info/wp-content/images/i2c.info/7-bit-address-reading.gif)
+---
+
+## Transferências Possíveis
+
+#### Formato Combinado:
+
+![combined-format](http://i2c.info/wp-content/images/i2c.info/7-bit-address-writing-reading.gif)
 ---
 
 ### Perguntas?
 
 <br>
 
-
-@fa[github gp-contact](https://github.com/Calebe94/)
-
-@fa[reddit gp-contact](https://reddit.com/u/Calebe94)
-
-@fa[telegram gp-contact](http://t.me/calebe94)
+| [Calebe94](https://github.com/Calebe94) | [/u/Calebe94](http://reddit.com/user/Calebe94) | [calebe94](http://t.me/calebe94) |
+|:-----:|:----:|:----:|
+| [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" style="width: 150px;"/>](https://github.com/Calebe94) | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/reddit-512.png" style="width: 150px;"/>](http://reddit.com/user/Calebe94) | [<img src="https://cdn2.iconfinder.com/data/icons/telegram/154/logotype-telegram-round-blue-logo-512.png" style="width: 150px;"/>](http://t.me/calebe94) |
 
