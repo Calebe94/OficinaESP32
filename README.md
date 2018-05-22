@@ -11,7 +11,7 @@ Para ver o arquivo em modo de apresentação basta acessar: https://gitpitch.com
 
 # Acesso ao código de exemplo:
 
-Este exemplo utiliza o barramento **I2C0** do ESP32 para configurar o **CI DS1307** que é um relógio de tempo real com calendário e o **CI AT24C32** que  fornece 4096 palavras de 8 bits cada, os CI's estão montados em um módulo chamado de *TinyRTC* que pode ser visto na figura abaixo.
+Este exemplo utiliza o barramento **I2C0** do ESP32 para configurar o **CI DS1307** que é um relógio de tempo real com calendário e a EEPROM **CI AT24C32** que  fornece 4096 palavras de 8 bits cada, os CI's estão montados em um módulo chamado de *TinyRTC* que pode ser visto na figura abaixo.
 
 ![TinyRTC](http://mekhos.com.br/mekhos/wp-content/uploads/2017/01/Tiny-RTC.jpg) 
 
@@ -25,4 +25,6 @@ O código desse projeto foi desenvolvido utilizando a framework [esp-idf](https:
 * [NXP Semiconductors - I2C-bus specification and user manual](https://www.nxp.com/docs/en/user-guide/UM10204.pdf)
 * [Philips Semiconductors - I2C MANUAL](https://www.nxp.com/docs/en/application-note/AN10216.pdf)
 * [Wikipedia - I2C](https://en.wikipedia.org/wiki/I²C)
-
+* [Texas Instruments - Understanding the I2C Bus](http://www.ti.com/lit/an/slva704/slva704.pdf)
+* [Newton Braga - Conheça o Barramento I2C (MIC098)](http://www.newtoncbraga.com.br/index.php/microcontroladores/143-tecnologia/12085-conheca-o-barramento-i2c-mic098)
+* [I2C Info - I2C Bus Specification](http://i2c.info/i2c-bus-specification)

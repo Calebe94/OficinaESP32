@@ -57,11 +57,11 @@
 ### Características de Hardware:
 #### Memória Interna:
 
-  * ROM: 448 KiB (Usada para Boot e funções do core);
-  * SRAM: 520 KiB (Para dados e instruções);
-  * RTC fast SRAM: 8 KiB (para armazenamento e CPU durante o boot do RTC);
-  * RTC slow SRAM: 8 KiB (Utilizado pelo co-processador durante o deep-sleep);
-  * Flash: entre 0 e 4 MiB (Suporta até 16MiB);
+  * ROM: 448 kB (Usada para Boot e funções do core);
+  * SRAM: 520 kB (Para dados e instruções);
+  * RTC fast SRAM: 8 kB (para armazenamento e CPU durante o boot do RTC);
+  * RTC slow SRAM: 8 kB (Utilizado pelo co-processador durante o deep-sleep);
+  * Flash: entre 0 e 4 MB (Suporta até 16MB);
 
 ---
 
@@ -135,6 +135,8 @@
 
 ---
 
+### Hello World com Arduino
+
 @title[Hello World com Arduino]
 
 <p><span class="slide-title">Pisca LED</span></p>
@@ -157,6 +159,8 @@ void loop() {
 @[7,8](Seta GPIO 2 para estado lógico BAIXO e espera 500ms)
 
 ---
+
+### Hello World com ESP-IDF
 
 @title[Hello World com ESP-IDF]
 
@@ -188,6 +192,8 @@ void app_main(){
 
 ---
 
+### Hello World com MicroPython
+
 @title[Hello World com MicroPython]
 
 <p><span class="slide-title">Pisca LED</span></p>
@@ -212,6 +218,28 @@ while True:
 
 ---
 
+## Projetos 
+
+### PocketSprite
+
+![](https://cdn.shopify.com/s/files/1/2306/4595/t/11/assets/PocketSprite-Sega-Emulator-1.png?16204621230715661419)
+---
+
+## Projetos 
+
+### PocketSprite
+![](https://cdn.shopify.com/s/files/1/2306/4595/files/PocketSprite-Palm-Sized-1.png?14979960333489014589)
+---
+
+## Projetos
+### Vídeo Composto no ESP32
+
+![](https://hackadaycom.files.wordpress.com/2018/02/bitluni3-e1519262186711.png?w=700&zoom=0)
+---
+
+# I2C
+---
+
 ## I2C
 ### Descrição
 * Inter-Integrated Circuit(Circuito Inter-Integrado);
@@ -225,10 +253,16 @@ while True:
 ### Descrição
 * Muito utilizada para conectar perifericos:
     * de baixa velocidade;
-    * em curtas distâncias;
+    * em curtas distâncias(Máx. 1m, além disso podemos ter problemas de impedância);
 
 aos microcontroladores e processadores;
 ---
+
+## I2C
+
+![i2c_bus](https://howtomechatronics.com/wp-content/uploads/2015/10/I2C-Communication-How-It-Works.png?x57244)
+---
+
 ## I2C
 
 * Desde 2006 nenhuma taxa é cobrada para implementar o protocolo I2C.
@@ -376,6 +410,39 @@ aos microcontroladores e processadores;
 
 ![combined-format](http://i2c.info/wp-content/images/i2c.info/7-bit-address-writing-reading.gif)
 ---
+## Projeto de Exemplo
+
+<!-- ![projeto_esp+i2c](https://i.imgur.com/GrYw4Oo.jpg?3) -->
+<img src="https://i.imgur.com/orpS9dQ.jpg" alt="projeto_esp+i2c" style="width:600px;height:500px;">
+---
+
+## Projeto de Exemplo
+
+* Utiliza o barramento **I2C0** do ESP32;
+  * configura o **CI DS1307** (que é um relógio de tempo real com calendário)
+  * configura a **CI AT24C32** (EEPROM que  fornece 4096 palavras de 8 bits cada)
+    * os CI's estão montados em um módulo chamado de *TinyRTC* que pode ser visto na figura abaixo.
+---
+
+## Projeto de Exemplo
+
+![TinyRTC](http://mekhos.com.br/mekhos/wp-content/uploads/2017/01/Tiny-RTC.jpg)
+---
+
+## Projeto de Exemplo
+
+<!-- ![projeto_esp+i2c](https://i.imgur.com/GrYw4Oo.jpg?3) -->
+<img src="https://i.imgur.com/gWNeKXw.jpg" alt="projeto_esp+i2c" style="width:600px;height:500px;">
+---
+
+## Projeto de Exemplo - Código
+### EEPROM - AT24C32
+---?code=project/main/at24c32.c&lang=c&title=AT24C32
+
+ @[1,3-6](Present code found within any repo source file.)
+ @[8-18](Without ever leaving your slideshow.)
+ @[19-28](Using GitPitch code-presenting with (optional) annotations.)
+---
 
 ### Perguntas?
 
@@ -385,3 +452,11 @@ aos microcontroladores e processadores;
 |:-----:|:----:|:----:|
 | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" style="width: 150px;"/>](https://github.com/Calebe94) | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/reddit-512.png" style="width: 150px;"/>](http://reddit.com/user/Calebe94) | [<img src="https://cdn2.iconfinder.com/data/icons/telegram/154/logotype-telegram-round-blue-logo-512.png" style="width: 150px;"/>](http://t.me/calebe94) |
 
+---
+### Referências
+
+#### Projetos
+
+* [SOFTWARE DEFINED TELEVISION ON AN ESP32](https://hackaday.com/2018/02/22/software-defined-television-on-an-esp32/)
+* [HANDS ON WITH THE SMALLEST GAME BOY EVER MADE](https://hackaday.com/2018/02/12/hands-on-with-the-smallest-game-boy-ever-made/)
+* [PORTING NES TO THE ESP32](https://hackaday.com/2016/10/10/porting-nes-to-the-esp32/)

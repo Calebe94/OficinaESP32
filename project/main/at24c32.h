@@ -1,0 +1,13 @@
+#ifndef _AT24C32_H_
+#define _AT24C32_H_
+
+#include <stdint.h>
+#include <driver/i2c.h>
+
+void at24c_write_byte(uint16_t offset, uint8_t data);
+
+void at24c_read_byte(uint16_t offset, uint8_t *data);
+
+void clear_at24c(void);
+
+#endif
