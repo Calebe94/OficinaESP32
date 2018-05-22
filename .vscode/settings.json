@@ -1,6 +1,7 @@
 {
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "files.associations": {
-        "task.h": "c"
+        "task.h": "c",
+        "freertos.h": "c"
     }
 }
