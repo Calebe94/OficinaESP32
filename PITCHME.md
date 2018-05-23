@@ -537,7 +537,7 @@ aos microcontroladores e processadores;
 
 ## Funcionamento
 
-[![esp32_i2c](https://i.imgur.com/cU9kiAt.gifv)](https://imgur.com/IKNSJcq)
+[![esp32_i2c](https://i.imgur.com/cU9kiAt.mp4)](https://imgur.com/IKNSJcq)
 ---
 
 ### Perguntas?
