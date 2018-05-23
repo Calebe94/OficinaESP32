@@ -123,7 +123,7 @@
 
 | ESP32 | ESP8266 | Arduino UNO |
 |-------|---------|-------------|
-|![esp32](https://i.imgur.com/4YzMzHU.png) | ![esp8266](https://i.imgur.com/Ar8TaMH.png) | ![arduino uno](https://i.imgur.com/MkJchEC.png) |
+|[![esp32](https://i.imgur.com/4YzMzHU.png)](https://lista.mercadolivre.com.br/esp32#D[A:esp32]) | [![esp8266](https://i.imgur.com/Ar8TaMH.png)](https://lista.mercadolivre.com.br/esp8266-nodemcu#D[A:esp8266-nodemcu]) | [![arduino uno](https://i.imgur.com/MkJchEC.png)](https://lista.mercadolivre.com.br/arduino-uno-r3#D[A:arduino-uno-r3]) |
 
 ---
 
@@ -131,7 +131,7 @@
 
 | Arduino Framework | ESP-IDF (C/C++) | MicroPython |
 |-------------------|-----------------|-------------|
-| ![esp32 and arduino](https://mjrobot.files.wordpress.com/2017/09/esp32-portada.png) | ![esp-idf](https://avatars1.githubusercontent.com/u/9460735?s=200&v=4) | ![micropython+esp32](https://i.ytimg.com/vi/QPNmQZrG8ZU/maxresdefault.jpg) |
+| [![esp32 and arduino](https://mjrobot.files.wordpress.com/2017/09/esp32-portada.png)](https://www.hackster.io/nikil511/esp32-arduino-ide-hello-world-df2565) | [![esp-idf](https://avatars1.githubusercontent.com/u/9460735?s=200&v=4)](https://esp-idf.readthedocs.io/en/latest/) | [![micropython+esp32](https://i.ytimg.com/vi/QPNmQZrG8ZU/maxresdefault.jpg)](https://micropython.org/download/#esp32) |
 
 ---
 
@@ -153,7 +153,7 @@ void loop() {
 }
 ```
 
-@[1,2,3](função setup() seta o GPIO 5 como saída digital)
+@[1,2,3](função setup() seta o GPIO 2 como saída digital)
 @[4](Cria loop infinito)
 @[5,6](Seta GPIO 2 para estado lógico ALTO e espera 500ms)
 @[7,8](Seta GPIO 2 para estado lógico BAIXO e espera 500ms)
@@ -184,7 +184,7 @@ void app_main(){
 
 @[1,2](Importa as bibliotecas de FreeRTOS necessárias para a utilização do vTaskDelay - delay)
 @[3](Importa a bilblioteca de acesso à GPIO)
-@[4](Igual a função main do C ANSII)
+@[4](Igual a função main do C Padrão)
 @[5,6](Exporta a GPIO 2 e seta como saída)
 @[7](Cria o loop infinito)
 @[8,9](Seta GPIO 2 para estado lógico ALTO e espera 500ms)
@@ -222,19 +222,20 @@ while True:
 
 ### PocketSprite
 
-![](https://cdn.shopify.com/s/files/1/2306/4595/t/11/assets/PocketSprite-Sega-Emulator-1.png?16204621230715661419)
+[![](https://cdn.shopify.com/s/files/1/2306/4595/t/11/assets/PocketSprite-Sega-Emulator-1.png?16204621230715661419)](https://hackaday.com/2018/02/12/hands-on-with-the-smallest-game-boy-ever-made/)
 ---
 
 ## Projetos 
 
 ### PocketSprite
-![](https://cdn.shopify.com/s/files/1/2306/4595/files/PocketSprite-Palm-Sized-1.png?14979960333489014589)
+
+[![](https://cdn.shopify.com/s/files/1/2306/4595/files/PocketSprite-Palm-Sized-1.png?14979960333489014589)](https://hackaday.com/2018/02/12/hands-on-with-the-smallest-game-boy-ever-made/)
 ---
 
 ## Projetos
 ### Vídeo Composto no ESP32
 
-![](https://hackadaycom.files.wordpress.com/2018/02/bitluni3-e1519262186711.png?w=700&zoom=0)
+[![](https://hackadaycom.files.wordpress.com/2018/02/bitluni3-e1519262186711.png?w=700&zoom=0)](https://hackaday.com/2018/02/22/software-defined-television-on-an-esp32/)
 ---
 
 # I2C
@@ -359,16 +360,16 @@ aos microcontroladores e processadores;
 ## ACK e NACK
 
 * Existem 5 condições que podem gerar um Bit de **Não Reconhecimento**:
-  1. Não existe nenhum receptor no barramento que reconhece o endereço transmitido;
-  2. O Receptor está imcapacitado de receber ou trasmitir pois está executando alguma função interna;
+  * 1. Não existe nenhum receptor no barramento que reconhece o endereço transmitido;
+  * 2. O Receptor está imcapacitado de receber ou trasmitir pois está executando alguma função interna;
 
 ---
 ## ACK e NACK:
 
 * Existem 5 condições que podem gerar um Bit de **Não Reconhecimento**:
-  3. Durante a transferência, o receptor recebeu dados ou comandos que ele não reconhece;
-  4. Durante a transferência, o receptor não pode receber mais dados;
-  5. Um **MESTRE-RECEPTOR** deve sinalizar o final da tranferência para um **ESCRAVO-TRANSMISSOR**.
+  * 3. Durante a transferência, o receptor recebeu dados ou comandos que ele não reconhece;
+  * 4. Durante a transferência, o receptor não pode receber mais dados;
+  * 5. Um **MESTRE-RECEPTOR** deve sinalizar o final da tranferência para um **ESCRAVO-TRANSMISSOR**.
 ---
 ## Endereçamento e o bit R/W
 
@@ -532,7 +533,11 @@ aos microcontroladores e processadores;
 @[80-83](Verifica se o botão GET foi apertado e chama a função get_from_eeprom)
 @[49](Função para pegar a data e hora da EEPROM)
 @[53-63](Lê todos os offsets, imprimo a data e hora na terminal serial)
+---
 
+## Funcionamento
+
+[![esp32_i2c](https://i.imgur.com/cU9kiAt.mp4)](https://imgur.com/IKNSJcq)
 ---
 
 ### Perguntas?
@@ -542,6 +547,26 @@ aos microcontroladores e processadores;
 | [Calebe94](https://github.com/Calebe94) | [/u/Calebe94](http://reddit.com/user/Calebe94) | [calebe94](http://t.me/calebe94) |
 |:-----:|:----:|:----:|
 | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" style="width: 150px;"/>](https://github.com/Calebe94) | [<img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/reddit-512.png" style="width: 150px;"/>](http://reddit.com/user/Calebe94) | [<img src="https://cdn2.iconfinder.com/data/icons/telegram/154/logotype-telegram-round-blue-logo-512.png" style="width: 150px;"/>](http://t.me/calebe94) |
+---
+
+### Referências
+#### ESP32
+* [ESP32 - FEATURES & SPECIFICATIONS](http://esp32.net)
+* [Getting Started with MicroPython on ESP32 – Hello World, GPIO, and WiFi](https://www.cnx-software.com/2017/10/16/esp32-micropython-tutorials/)
+* [Spakfun - ESP32 Thing Hookup Guide](https://learn.sparkfun.com/tutorials/esp32-thing-hookup-guide)
+* [Overview of ESP32 features. What do they practically mean?](https://www.exploreembedded.com/wiki/Overview_of_ESP32_features._What_do_they_practically_mean%3F)
+* [Hello World with ESP32 Explained](https://exploreembedded.com/wiki/Hello_World_with_ESP32_Explained)
+* [ESP32 Arduino IDE "Hello World"](https://www.hackster.io/nikil511/esp32-arduino-ide-hello-world-df256)
+---
+
+### Referências
+#### I2C:
+* [Conheça o Barramento I2C](http://www.newtoncbraga.com.br/index.php/microcontroladores/143-tecnologia/12085-conheca-o-barramento-i2c-mic098)
+* [I2C – Protocolo de Comunicação](http://www.arduinobr.com/arduino/i2c-protocolo-de-comunicacao/)
+* [I2C Info – I2C Bus, Interface and Protocol](http://i2c.info)
+* [The I2C-bus and how to use it (including specifications)](https://www.i2c-bus.org/fileadmin/ftp/i2c_bus_specification_1995.pdf)
+* [I2C-bus specification and user manual](https://www.nxp.com/docs/en/user-guide/UM10204.pdf)
+* [Sparfun - I2C](https://learn.sparkfun.com/tutorials/i2c)
 
 ---
 ### Referências
