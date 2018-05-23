@@ -1,5 +1,10 @@
-#include "ds1307.h"
+#include <stdint.h>
+#include <time.h>
+#include <driver/i2c.h>
 #include <freertos/FreeRTOS.h>
+#include "ds1307.h"
+
+#define DS1307_ADDRESS 	0x68
 
 time_t get_time(void){
 	i2c_cmd_handle_t cmd = i2c_cmd_link_create();

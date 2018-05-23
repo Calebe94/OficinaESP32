@@ -431,17 +431,108 @@ aos microcontroladores e processadores;
 
 ## Projeto de Exemplo
 
+* Funcionamento 
+  * Dois botões
+    * um botão armazena os valores de tempo do RTC na EEPROM(**SAVE**);
+    * o outro botão imprimir no terminal serial os valores adquiridos na EEPROM(**GET**).
+---
+
+## Projeto de Exemplo
+
 <!-- ![projeto_esp+i2c](https://i.imgur.com/GrYw4Oo.jpg?3) -->
 <img src="https://i.imgur.com/gWNeKXw.jpg" alt="projeto_esp+i2c" style="width:600px;height:500px;">
+---
+
+## Projeto de Exemplo - Datasheets
+
+* Verificar os datasheets para obter os endereços;
+
+| [AT24C32](http://ww1.microchip.com/downloads/en/devicedoc/doc0336.pdf) | [DS1307](https://datasheets.maximintegrated.com/en/ds/DS1307.pdf) |
+|:-------:|:------:|
+| ![AT24C32 DATA ADDRESS](https://i.imgur.com/mSuC6x2.png) | ![DS1307 DATA ADDRESS](https://i.imgur.com/XECUG1n.png ) |
+| 0x50 | 0x68 |
+---
+
+## Projeto de Exemplo - Caso Específico
+
+* Como o AT24C32 tem 4096 palavras, 1 byte(8 bits) não é capaz de endereçar os offsets;
+  * pois o valor máximo que cabe em 8 bits é 255;
+  * para endereçar 4096 palavras é necessário 12 bits;
+  Então ...
+---
+
+## Projeto de Exemplo - AT24C32
+
+![AT24C32 - DATA WRITE](https://i.imgur.com/hE3Znb8.png)
+---
+
+## Projeto de Exemplo - DS1307
+
+* O DS1307 auto-incrementa o endereço do registrador durante a leitura e escrita
+![DS1307 - OFFSETS](https://i.imgur.com/aRBkLBD.png)
 ---
 
 ## Projeto de Exemplo - Código
 ### EEPROM - AT24C32
 ---?code=project/main/at24c32.c&lang=c&title=AT24C32
 
-@[1,3-6](Present code found within any repo source file.)
-@[8-18](Without ever leaving your slideshow.)
-@[19-28](Using GitPitch code-presenting with (optional) annotations.)
+@[1](Inclui variáveis de 8 bits-uint8_t- e 16 bits-uint16_t- ...)
+@[2](Inclui as funções para Habilitar a I2C)
+@[3](Inclui defines do kernel FreeRTOS)
+@[4](Inclui apenas os protótipos das funções)
+@[6](Endereço da EEPROM)
+@[7](Número máximo de offsets da EEPROM)
+
+@[9](Função para gravar dados na EEPROM)
+@[11](Gera a condição de START)
+@[12](Envia o Endereço da EEPROM, informa que é escrita e informa que espera o bit ACK)
+@[13](Envia os bits mais significativos do offset)
+@[14](Envia os bits menos significativos do offset)
+@[15](Envia o valor para ser gravado na EEPROM)
+@[16](Gera a condição de STOP)
+@[17](Informa ao periférico I2C0 para iniciar a transação)
+
+@[22](Função para ler dados da EEPROM)
+@[24-27](Informa o Offset para a EEPROM)
+@[29](Gera a condição de START Repetido)
+@[31](Informa que quer ler)
+@[32](Lê o valor do offset e grava na variável data)
+@[33-34](Gera a condição de STOP e inicia a transação)
+
+---?code=project/main/ds1307.c&lang=c&title=DS1307
+
+@[1-5](Mesma coisa da EEPROM)
+@[7](Endereço I2C do DS1307)
+@[9](Função para obter o tempo do DS1307, retorna o tempo em time_t - C Padrão -)
+@[11](Gera condição de Start)
+@[12](Envia o Endereço do Relógio e informa que a operação é de escrita)
+@[13](Informa o registrador primeiro registrador)
+@[14](Gera condição de Start Repetido)
+@[15](Dessa vez é leitura)
+@[18](Lê os 7 registradores- Segundos, Minutos, Horas, ... e Força o NACK)
+@[19](Gera a Condição de STOP)
+@[22](Transforma o vetor de 7 posições lido do Relógio em uma variável time_t)
+
+---?code=project/main/main.c&lang=c&title=MAIN
+
+@[1-7](Inclui todas as Bibliotecas necessárias)
+@[9-12](Defines das GPIOs utilizadas)
+
+@[14-25](Habilita o periférico I2C0 do ESP32)
+
+@[66](app_main = main)
+@[67-71](Habilita as GPIO 32 e 33 como entrada e habilido o I2C0)
+@[73](loop)
+@[75-79](Verifica se o botão SAVE foi apertado e chama a função save_to_eeprom)
+
+@[27](Função para gravar a Data e Hora na EEPROM)
+@[29-32](Transforma o time_t -32 bits- para 4 variáveis de 4 bits)
+@[36-45](Procura um espaço vazio na EEPROM para armazenar o tempo e hora)
+
+@[80-83](Verifica se o botão GET foi apertado e chama a função get_from_eeprom)
+@[49](Função para pegar a data e hora da EEPROM)
+@[53-63](Lê todos os offsets, imprimo a data e hora na terminal serial)
+
 ---
 
 ### Perguntas?

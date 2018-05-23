@@ -1,14 +1,6 @@
 #ifndef _DS1307_H_
 #define _DS1307_H_
 
-#include <stdint.h>
-#include <time.h>
-#include <driver/i2c.h>
-
-#define SDA_PIN 		21
-#define SCL_PIN 		22
-#define DS1307_ADDRESS 	0x68
-
 time_t get_time(void);
 
 void set_time(time_t time);

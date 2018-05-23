@@ -6,7 +6,10 @@
 #include "ds1307.h"
 #include "at24c32.h"
 
-#define TIME_OFFSET MAX_OFFSET/sizeof(time_t)
+#define SDA_PIN 		21
+#define SCL_PIN 		22
+#define BUTTON_SAVE     GPIO_NUM_32
+#define BUTTON_GET      GPIO_NUM_33
 
 void i2c0_init(void){
     i2c_config_t conf = {
@@ -61,16 +64,16 @@ void get_from_eeprom(){
 }
 
 void app_main(void){
-    gpio_pad_select_gpio(GPIO_NUM_32);
-    gpio_set_direction(GPIO_NUM_32, GPIO_MODE_INPUT);
+    gpio_pad_select_gpio(BUTTON_SAVE);
+    gpio_set_direction(BUTTON_SAVE, GPIO_MODE_INPUT);
     gpio_pad_select_gpio(GPIO_NUM_33);
     gpio_set_direction(GPIO_NUM_33, GPIO_MODE_INPUT);
     i2c0_init();
     // clear_at24c();
     while (1) {
         time_t time = 0;
-        if(gpio_get_level(GPIO_NUM_32)){
-            while(gpio_get_level(GPIO_NUM_32));
+        if(gpio_get_level(BUTTON_SAVE)){
+            while(gpio_get_level(BUTTON_SAVE));
             time = get_time();
             save_to_eeprom(time);
         } 
